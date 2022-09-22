@@ -1,11 +1,16 @@
 namespace ConvexHull.Algorithms;
 
+/// <summary>
+///     An incremental algorithm starting from x_min, adding each point to the hull and tracking back and removing points
+///     not on the hull.
+///     O(n log n)
+/// </summary>
 public class IncrementalAlgorithm : IConvexHullAlgorithm
 {
     public List<Vector3> Compute(List<Vector3> input)
     {
         input.Sort(Helper.EdgeCompareX);
-        
+
         var upperHull = ComputeUpperHull(input);
         var lowerHull = ComputeLowerHull(input);
 
@@ -18,10 +23,11 @@ public class IncrementalAlgorithm : IConvexHullAlgorithm
 
         return ComputeUpperHull(input);
     }
+
     private static IEnumerable<Vector3> ComputeUpperHull(List<Vector3> input)
     {
         var output = new List<Vector3>();
-        
+
         foreach (var v in input)
         {
             output.Add(v);

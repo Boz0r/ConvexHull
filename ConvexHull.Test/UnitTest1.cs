@@ -8,8 +8,7 @@ namespace ConvexHull.Test;
 
 public class UnitTest1
 {
-    [Theory]
-    [ClassData(typeof(AlgorithmTestData))]
+    [Theory, ClassData(typeof(AlgorithmTestData))]
     public void IncrementalAlgorithm(List<Vector3> input, List<Vector3> expected)
     {
         IConvexHullAlgorithm algorithm = new IncrementalAlgorithm();
@@ -21,8 +20,7 @@ public class UnitTest1
         result.Should().BeEquivalentTo(expected);
     }
 
-    [Theory]
-    [ClassData(typeof(AlgorithmTestData))]
+    [Theory, ClassData(typeof(AlgorithmTestData))]
     public void NaiveAlgorithm(List<Vector3> input, List<Vector3> expected)
     {
         IConvexHullAlgorithm algorithm = new NaiveAlgorithm();
@@ -37,7 +35,7 @@ public class UnitTest1
     [Fact]
     public void SortClockwise()
     {
-        List<Vector3> input = new List<Vector3>
+        var input = new List<Vector3>
         {
             new(2, 1, 0),
             new(1, -1, 0),
@@ -49,7 +47,7 @@ public class UnitTest1
 
         var sortClockwise = Helper.SortClockwise(input);
 
-        List<Vector3> expected = new List<Vector3>
+        var expected = new List<Vector3>
         {
             new(0, 0, 0),
             new(1, 1, 0),
@@ -83,7 +81,7 @@ public class UnitTest1
 
         var isToTheLeft = Helper.IsToTheLeft(r, p, q);
 
-        isToTheLeft.Should().BeApproximately(0.0, Double.Epsilon);
+        isToTheLeft.Should().BeApproximately(0.0, double.Epsilon);
     }
 
     [Fact]
