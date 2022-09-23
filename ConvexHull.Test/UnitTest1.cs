@@ -95,6 +95,19 @@ public class UnitTest1
 
         isToTheLeft.Should().BeNegative();
     }
+
+    [Fact]
+    public void Shuffle()
+    {
+        var input = new List<int>
+            {1,2,3,4,5,6,7,8,9};
+
+        var shuffled = new List<int>(input);
+        shuffled.Shuffle();
+
+        input.Should().BeEquivalentTo(shuffled);
+        input.Should().NotBeSameAs(shuffled);
+    }
 }
 
 public class AlgorithmTestData : IEnumerable<object[]>
