@@ -33,6 +33,29 @@ public class UnitTest1
     }
 
     [Fact]
+    public void FindMinMax()
+    {
+        var input = new List<Vector3>
+        {
+            new(3, 0, 0),
+            new(1, 1, 0),
+            new(0, 0, 0),
+            new(2, 0, 0),
+            new(1, 0, 0),
+            new(2, 1, 0),
+            new(1, -1, 0),
+            new(2, -1, 0),
+        };
+
+        var (min, max) = Helper.FindMinMax(input);
+
+        using var scope = new AssertionScope();
+        
+        min.Should().Be(new Vector3(0, 0, 0));
+        max.Should().Be(new Vector3(3, 0, 0));
+    }
+
+    [Fact]
     public void SortClockwise()
     {
         var input = new List<Vector3>
