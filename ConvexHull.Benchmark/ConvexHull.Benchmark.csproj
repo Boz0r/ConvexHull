@@ -8,12 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoFixture" Version="4.17.0"/>
-        <PackageReference Include="BenchmarkDotNet" Version="0.13.2"/>
+        <PackageReference Include="AutoFixture" Version="4.17.0" />
+        <PackageReference Include="BenchmarkDotNet" Version="0.13.2" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ConvexHull\ConvexHull.csproj"/>
+        <ProjectReference Include="..\ConvexHull\ConvexHull.csproj" />
     </ItemGroup>
 
 </Project>

@@ -5,12 +5,19 @@ using ConvexHull.Algorithms;
 
 namespace ConvexHull.Benchmark;
 
-public class Benchmarks
+public class AlgorithmBenchmarks
 {
     private readonly IConvexHullAlgorithm incrementalAlgorithm = new IncrementalAlgorithm();
     private readonly IConvexHullAlgorithm naiveAlgorithm = new NaiveAlgorithm();
-    private readonly IBridgeStrategy bridgeStrategy = new DefaultBridgeStrategy();
+    private readonly IConvexHullAlgorithm kirkpatrickSeidelAlgorithm = new KirkpatrickSeidelAlgorithm();
 
+    [Benchmark, Arguments(10), Arguments(100), Arguments(1000)]
+    public List<Vector3> KirkpatrickSeidelAlgorithm(int count)
+    {
+        var input = new Fixture().CreateMany<Vector3>(count).ToList();
+        return kirkpatrickSeidelAlgorithm.Compute(input);
+    }
+    
     [Benchmark, Arguments(10), Arguments(100), Arguments(1000)]
     public List<Vector3> IncrementalAlgorithm(int count)
     {
@@ -18,18 +25,10 @@ public class Benchmarks
         return incrementalAlgorithm.Compute(input);
     }
     
-    [Benchmark, Arguments(10), Arguments(100), Arguments(1000)]
+    // [Benchmark, Arguments(10), Arguments(100), Arguments(1000)]
     public List<Vector3> NaiveAlgorithm(int count)
     {
         var input = new Fixture().CreateMany<Vector3>(count).ToList();
         return naiveAlgorithm.Compute(input);
-    }
-
-    [Benchmark, Arguments(1), Arguments(10), Arguments(100), Arguments(1000)]
-    public (Vector3 i, Vector3 j) DefaultBridgeStrategy(int count)
-    {
-        var input = new Fixture().CreateMany<Vector3>(count).ToList();
-
-        return bridgeStrategy.Bridge(input, 1);
     }
 }
