@@ -1,7 +1,9 @@
 ﻿using BenchmarkDotNet.Running;
+using ConvexHull.Benchmark;
 
 // See https://aka.ms/new-console-template for more information
 
 Console.WriteLine("Hello, World!");
 
-var summary = BenchmarkRunner.Run(typeof(Program).Assembly);
+var bridgeSummary = BenchmarkRunner.Run<KSBridgeBenchmarks>();
+var algorithmSummary = BenchmarkRunner.Run<AlgorithmBenchmarks>();
