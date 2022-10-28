@@ -29,8 +29,7 @@ jobs:
     - name: Test Reporter
       uses: dorny/test-reporter@v1.6.0
       with:
-        artifact: test-results            # artifact name
-        name: JEST Tests                  # Name of the check run which will be created
+        name: Dotnet Tests                # Name of the check run which will be created
         path: '*.xml'                     # Path to test results (inside artifact .zip)
         reporter: dotnet-trx              # Format of test results
 
