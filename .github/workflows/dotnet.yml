@@ -25,11 +25,10 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --logger "trx;logfilename=mytests.xml" --results-directory ./testresults/
     - name: Test Reporter
       uses: dorny/test-reporter@v1.6.0
       with:
         name: Dotnet Tests                # Name of the check run which will be created
         path: '*.xml'                     # Path to test results (inside artifact .zip)
         reporter: dotnet-trx              # Format of test results
-
