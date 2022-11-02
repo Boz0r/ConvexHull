@@ -1,36 +1,11 @@
 using System.Numerics;
-using ConvexHull.Algorithms;
 using FluentAssertions;
 using FluentAssertions.Execution;
 
 namespace ConvexHull.Test;
 
-public class UnitTest1
+public class HelperTests
 {
-    [Theory, ClassData(typeof(AlgorithmTestData))]
-    public void IncrementalAlgorithm(List<Vector3> input, List<Vector3> expected)
-    {
-        IConvexHullAlgorithm algorithm = new IncrementalAlgorithm();
-
-        var result = algorithm.Compute(input);
-
-        using var scope = new AssertionScope();
-
-        result.Should().BeEquivalentTo(expected);
-    }
-
-    [Theory, ClassData(typeof(AlgorithmTestData))]
-    public void NaiveAlgorithm(List<Vector3> input, List<Vector3> expected)
-    {
-        IConvexHullAlgorithm algorithm = new NaiveAlgorithm();
-
-        var result = algorithm.Compute(input);
-
-        using var scope = new AssertionScope();
-
-        result.Should().BeEquivalentTo(expected);
-    }
-
     [Fact]
     public void FindMinMax()
     {
