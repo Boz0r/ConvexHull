@@ -25,7 +25,7 @@ public class AlgorithmBenchmarks
         return incrementalAlgorithm.Compute(input);
     }
     
-    // [Benchmark, Arguments(10), Arguments(100), Arguments(1000)]
+    [Benchmark, Arguments(10), Arguments(100), Arguments(1000)]
     public List<Vector3> NaiveAlgorithm(int count)
     {
         var input = new Fixture().CreateMany<Vector3>(count).ToList();
