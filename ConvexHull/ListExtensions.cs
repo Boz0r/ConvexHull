@@ -1,6 +1,6 @@
 ﻿namespace ConvexHull;
 
-public static class Extensions
+public static class ListExtensions
 {
     public static void Shuffle<T>(this IList<T> list)
     {
