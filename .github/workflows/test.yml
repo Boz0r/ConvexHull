@@ -3,27 +3,43 @@ name: CI
 on:
   push:
     branches:
-      - master
-    tags:
-      - 'v*.*.*'
-
+    - main
+  pull_request:
+    branches:
+    - main
+    
 jobs:
+  build_and_test:
 
-  build:
+    env:
+      BUILD_CONFIG: 'Release'
+      SOLUTION: 'ConvexHull.sln'
+
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup .NET Core
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.100
-    - name: Generate coverage report
-      run: |
-        cd ./ConvexHull.Test/
-        dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
-    - name: Publish coverage report to coveralls.io
-      uses: coverallsapp/github-action@master
+        dotnet-version: 6.x
+
+
+    - name: Restore dependencies
+      run: dotnet restore $SOLUTION
+
+    - name: Build
+      run: dotnet build $SOLUTION --configuration $BUILD_CONFIG
+      
+    - name: Test
+      run: dotnet test $SOLUTION --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results.trx" || true
+      
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./ConvexHull.Test/TestResults/coverage.info 
+        name: DotNET Tests
+        path: "**/test-results.trx"                            
+        reporter: dotnet-trx
+        fail-on-error: true
