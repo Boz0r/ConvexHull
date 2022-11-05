@@ -45,7 +45,8 @@ public class KirkpatrickSeidelAlgorithmTests
         j.Should().Be(new Vector3(1, 3, 0));
     }
 
-    [Theory, ClassData(typeof(AlgorithmTestData))]
+    [Theory]
+    [RepeatClassData(10000, typeof(AlgorithmTestData))]
     public void KirkpatrickSeidelAlgorithm(List<Vector3> input, List<Vector3> expected)
     {
         IConvexHullAlgorithm algorithm = new KirkpatrickSeidelAlgorithm();
