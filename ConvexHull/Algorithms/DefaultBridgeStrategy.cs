@@ -2,8 +2,6 @@
 
 public class DefaultBridgeStrategy : IBridgeStrategy
 {
-    private readonly Random _random = new Random(8);
-
     public (Vector3 i, Vector3 j) Bridge(List<Vector3> S, float a)
     {
         var candidates = new List<Vector3>();
@@ -55,7 +53,7 @@ public class DefaultBridgeStrategy : IBridgeStrategy
         if (pairs.Count > 0)
         {
             // 4. Determine K, the median of {k(p, P)I(P, P) PAIRS}
-            var k = pairs[_random.Next(0, pairs.Count - 1)].slope;
+            var k = pairs[RandomProvider.Random.Next(0, pairs.Count - 1)].slope;
 
             var small = pairs.Where(pair => pair.slope < k).ToList();
             var equal = pairs.Where(pair => Math.Abs(pair.slope - k) < 0.00001).ToList();

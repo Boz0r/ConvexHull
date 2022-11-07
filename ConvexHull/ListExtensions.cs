@@ -8,7 +8,7 @@ public static class ListExtensions
         while (n > 1)
         {
             n--;
-            var k = Random.Shared.Next(n + 1);
+            var k = RandomProvider.Random.Next(n + 1);
             (list[k], list[n]) = (list[n], list[k]);
         }
     }

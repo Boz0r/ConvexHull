@@ -23,11 +23,28 @@ public class AlgorithmTestData : IEnumerable<object[]>
             new List<Vector3>
             {
                 new(0, 0, 0),
-                new(1, -1, 0),
                 new(1, 1, 0),
-                new(2, -1, 0),
                 new(2, 1, 0),
                 new(3, 0, 0),
+                new(2, -1, 0),
+                new(1, -1, 0),
+            },
+        };
+        yield return new object[]
+        {
+            new List<Vector3>
+            {
+                new(1, 1, 0),
+                new(-1, -1, 0),
+                new(1, -1, 0),
+                new(-1, 1, 0),
+            },
+            new List<Vector3>
+            {
+                new(1, -1, 0),
+                new(1, 1, 0),
+                new(-1, 1, 0),
+                new(-1, -1, 0),
             },
         };
     }

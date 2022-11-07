@@ -46,9 +46,10 @@ public class KirkpatrickSeidelAlgorithmTests
     }
 
     [Theory]
-    [RepeatClassData(10000, typeof(AlgorithmTestData))]
-    public void KirkpatrickSeidelAlgorithm(List<Vector3> input, List<Vector3> expected)
+    [RepeatClassData(10, typeof(AlgorithmTestData))]
+    public void KirkpatrickSeidelAlgorithm(int iteration, List<Vector3> input, List<Vector3> expected)
     {
+        RandomProvider.Random = new Random(iteration);
         IConvexHullAlgorithm algorithm = new KirkpatrickSeidelAlgorithm();
 
         var result = algorithm.Compute(input);

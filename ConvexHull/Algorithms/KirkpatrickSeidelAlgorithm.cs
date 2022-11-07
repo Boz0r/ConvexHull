@@ -21,7 +21,6 @@ public class Pair
 
 public class KirkpatrickSeidelAlgorithm : IConvexHullAlgorithm
 {
-    private static readonly Random _random = Random.Shared;
     private readonly IBridgeStrategy _defaultBridgeStrategy;
 
     public KirkpatrickSeidelAlgorithm()
@@ -86,7 +85,7 @@ public class KirkpatrickSeidelAlgorithm : IConvexHullAlgorithm
     {
         var output = new List<Vector3>();
 
-        var a = S[_random.Next(0, S.Count)].X;
+        var a = S[RandomProvider.Random.Next(0, S.Count)].X;
 
         var (i, j) = _defaultBridgeStrategy.Bridge(S, a);
 

@@ -13,6 +13,7 @@ public sealed class RepeatClassDataAttribute : ClassDataAttribute
                 message: "Repeat count must be greater than 0."
             );
         }
+
         this.count = count;
     }
 
@@ -20,9 +21,11 @@ public sealed class RepeatClassDataAttribute : ClassDataAttribute
     {
         foreach (var iterationNumber in Enumerable.Range(start: 1, count: this.count))
         {
-            foreach (var data in base.GetData(testMethod))
+            foreach (var data in base.GetData(testMethod).ToList())
             {
-                yield return data;
+                List<object> objects = new() { iterationNumber };
+                objects.AddRange(data);
+                yield return objects.ToArray();
             }
         }
     }
