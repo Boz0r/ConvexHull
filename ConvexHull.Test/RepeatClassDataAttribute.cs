@@ -23,9 +23,8 @@ public sealed class RepeatClassDataAttribute : ClassDataAttribute
         {
             foreach (var data in base.GetData(testMethod).ToList())
             {
-                List<object> objects = new() { iterationNumber };
-                objects.AddRange(data);
-                yield return objects.ToArray();
+                RandomProvider.Random = new Random(iterationNumber);
+                yield return data;
             }
         }
     }
