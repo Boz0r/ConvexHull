@@ -65,47 +65,6 @@ public class KirkpatrickSeidelAlgorithmTests
         j.Should().Be(new Vector3(2, 2, 0));
     }
 
-    [Theory, Repeat(100)]
-    public void Bridge_A_Above()
-    {
-        var input = new List<Vector3>
-        {
-            // new(4, 2, 0),
-            new(2, 3, 0),
-            new(0, 1, 0),
-            new(-2, 1, 0),
-        };
-
-        DefaultBridgeStrategy sut = new DefaultBridgeStrategy();
-
-        var (i, j) = sut.Bridge(input, 3);
-
-        using var scope = new AssertionScope();
-
-        i.Should().Be(new Vector3(-2, 1, 0));
-        j.Should().Be(new Vector3(2, 3, 0));
-    }
-
-    [Theory, Repeat(100)]
-    public void Bridge_A_Below()
-    {
-        var input = new List<Vector3>
-        {
-            new(2, 3, 0),
-            new(0, 1, 0),
-            new(-2, 1, 0),
-        };
-
-        DefaultBridgeStrategy sut = new DefaultBridgeStrategy();
-
-        var (i, j) = sut.Bridge(input, -3);
-
-        using var scope = new AssertionScope();
-
-        i.Should().Be(new Vector3(-2, 1, 0));
-        j.Should().Be(new Vector3(2, 3, 0));
-    }
-
     [Theory, RepeatClassData(100, typeof(AlgorithmTestData))]
     public void KirkpatrickSeidelAlgorithm(List<Vector3> input, List<Vector3> expected)
     {
