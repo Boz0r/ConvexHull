@@ -18,13 +18,13 @@ public class KirkpatrickSeidelAlgorithmTests
         };
 
         DefaultBridgeStrategy sut = new DefaultBridgeStrategy();
-        
+
         var (i, j) = sut.Bridge(input, 3);
-        
+
         i.Should().Be(new Vector3(3, 6, 0));
         j.Should().Be(new Vector3(10, 5, 0));
-    }   
-    
+    }
+
     [Theory, Repeat(100)]
     public void Bridge2()
     {
@@ -36,15 +36,35 @@ public class KirkpatrickSeidelAlgorithmTests
         };
 
         DefaultBridgeStrategy sut = new DefaultBridgeStrategy();
-        
+
         var (i, j) = sut.Bridge(input, .5f);
 
         using var scope = new AssertionScope();
-        
+
         i.Should().Be(new Vector3(0, 1, 0));
         j.Should().Be(new Vector3(1, 3, 0));
     }
-    
+
+    [Theory, Repeat(100)]
+    public void Bridge3()
+    {
+        var input = new List<Vector3>
+        {
+            new(2, 2, 0),
+            new(1, 3, 0),
+            new(0, 1, 0),
+        };
+
+        DefaultBridgeStrategy sut = new DefaultBridgeStrategy();
+
+        var (i, j) = sut.Bridge(input, 1);
+
+        using var scope = new AssertionScope();
+
+        i.Should().Be(new Vector3(1, 3, 0));
+        j.Should().Be(new Vector3(2, 2, 0));
+    }
+
     [Theory, Repeat(100)]
     public void Bridge_A_Above()
     {
@@ -57,15 +77,15 @@ public class KirkpatrickSeidelAlgorithmTests
         };
 
         DefaultBridgeStrategy sut = new DefaultBridgeStrategy();
-        
+
         var (i, j) = sut.Bridge(input, 3);
 
         using var scope = new AssertionScope();
-        
+
         i.Should().Be(new Vector3(-2, 1, 0));
         j.Should().Be(new Vector3(2, 3, 0));
     }
-    
+
     [Theory, Repeat(100)]
     public void Bridge_A_Below()
     {
@@ -77,11 +97,11 @@ public class KirkpatrickSeidelAlgorithmTests
         };
 
         DefaultBridgeStrategy sut = new DefaultBridgeStrategy();
-        
+
         var (i, j) = sut.Bridge(input, -3);
 
         using var scope = new AssertionScope();
-        
+
         i.Should().Be(new Vector3(-2, 1, 0));
         j.Should().Be(new Vector3(2, 3, 0));
     }
