@@ -85,8 +85,12 @@ public class KirkpatrickSeidelAlgorithm : IConvexHullAlgorithm
     {
         var output = new List<Vector3>();
 
-        var a = S[RandomProvider.Random.Next(0, S.Count)].X;
+        // Find a real number splitting S in half
+        // Let a = x(p_i), where p_i is randomly chosen from S - {p_m}
+        // such that the choice of every point in S - {p_m} is equally likely
+        var a = FindSplitPoint(max, S);
 
+        // Find the bridge over x = a
         var (i, j) = _defaultBridgeStrategy.Bridge(S, a);
 
         var sLeft = new List<Vector3>
@@ -116,5 +120,11 @@ public class KirkpatrickSeidelAlgorithm : IConvexHullAlgorithm
         }
 
         return output;
+    }
+
+    private static float FindSplitPoint(Vector3 max, List<Vector3> S)
+    {
+        var sExceptMax = S.Except(new[] { max }).ToList();
+        return sExceptMax[RandomProvider.Random.Next(0, sExceptMax.Count)].X;
     }
 }
