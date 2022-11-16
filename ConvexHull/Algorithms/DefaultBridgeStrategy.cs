@@ -35,14 +35,9 @@ public class DefaultBridgeStrategy : IBridgeStrategy
             {
                 pairs.Remove(pair);
 
-                if (pair.i.Y > pair.j.Y)
-                {
-                    candidates.Add(pair.i);
-                }
-                else
-                {
-                    candidates.Add(pair.j);
-                }
+                var candidateToAdd = pair.i.Y > pair.j.Y ? pair.i : pair.j;
+
+                candidates.Add(candidateToAdd);
             }
             else
             {
@@ -53,6 +48,7 @@ public class DefaultBridgeStrategy : IBridgeStrategy
         if (pairs.Count > 0)
         {
             // 4. Determine K, the median of {k(p, P)I(P, P) PAIRS}
+            // Randomly choose an element (p_i, p_j) from PAIRS such that the choice of every element is equally likely, and let K <- k(p_i, p_j)
             var k = pairs[RandomProvider.Random.Next(0, pairs.Count - 1)].slope;
 
             var small = pairs.Where(pair => pair.slope < k).ToList();
@@ -99,8 +95,8 @@ public class DefaultBridgeStrategy : IBridgeStrategy
 
         return Bridge(candidates, a);
     }
-    
-    
+
+
     private float K(Vector3 i, Vector3 j)
     {
         return (i.Y - j.Y) / (i.X - j.X);
