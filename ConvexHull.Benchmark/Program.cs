@@ -5,5 +5,5 @@ using ConvexHull.Benchmark;
 
 Console.WriteLine("Hello, World!");
 
-var bridgeSummary = BenchmarkRunner.Run<KSBridgeBenchmarks>();
+// var bridgeSummary = BenchmarkRunner.Run<KSBridgeBenchmarks>();
 var algorithmSummary = BenchmarkRunner.Run<AlgorithmBenchmarks>();
